@@ -294,40 +294,42 @@ const ProductSelection = ({ useCase, selectedProducts, handleProductSelect }) =>
   );
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       {availableProductTypes.map((productType) => {
         const typeProducts = productsData[productType.id] || [];
 
         return (
-          <div key={productType.id} className="border-b pb-8">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold">{productType.title}</h2>
-              <p className="text-gray-600">{productType.description}</p>
+          <div key={productType.id} className="border-b pb-6">
+            <div className="mb-4">
+              <h2 className="text-xl font-bold">{productType.title}</h2>
+              <p className="text-sm text-gray-600">{productType.description}</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {typeProducts.map((product) => (
                 <button
                   key={product.id}
                   onClick={() => handleProductSelect(product)}
-                  className={`p-6 rounded-lg border-2 hover:border-tealCustom-500 hover:shadow-lg transition-all
+                  className={`p-4 rounded-lg border-2 hover:border-tealCustom-500 hover:shadow-md transition-all
                     ${selectedProducts.find((p) => p.id === product.id)
                       ? "border-tealCustom-500 bg-tealCustom-50"
                       : "border-gray-200"}`}
                   title={product.tooltip}
                 >
-                  <div className="flex flex-col items-center space-y-4">
-                  {product.image && (
-  <div className="bg-gray-100 p-4 rounded-lg w-full flex justify-center">
-    <img 
-      src={product.image} 
-      alt={`${product.name}`} 
-      className="h-24 w-auto object-contain invert"
-    />
-  </div>
-)}
-                    <p className="text-gray-600">{product.description}</p>
-                    <div className="text-xl font-semibold">
+                  <div className="flex flex-col items-center space-y-2">
+                    {product.image && (
+                      <div className="bg-gray-100 p-2 rounded-lg w-full flex justify-center">
+                        <img
+                          src={product.image}
+                          alt={`${product.name}`}
+                          className="h-16 w-auto object-contain"
+                        />
+                      </div>
+                    )}
+                    <p className="text-sm text-gray-600 text-center">
+                      {product.description}
+                    </p>
+                    <div className="text-lg font-medium">
                       ${product.basePrice}/user/month
                     </div>
                   </div>
@@ -340,6 +342,7 @@ const ProductSelection = ({ useCase, selectedProducts, handleProductSelect }) =>
     </div>
   );
 };
+
 
 // --- Estimate Component ---
 const EstimateStep = ({ selectedProducts = [], users = {}, setUsers, handleRemoveProduct }) => {
