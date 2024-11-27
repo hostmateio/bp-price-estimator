@@ -159,7 +159,7 @@ const productsData = {
     {
       id: "bp-premier",
       name: "Bp Premier",
-      image: "/images/products/bpprem.png",
+      image: "/bp-price-estimator/images/products/bpprem.png",
       description: "Complete practice management solution for GP clinics.",
       tooltip: "Comprehensive solution tailored for general practitioners.",
       basePrice: 199,
@@ -169,7 +169,7 @@ const productsData = {
     {
       id: "bp-vipnet",
       name: "Bp ViP.net",
-      image: "/images/products/vipnet.png",
+      image: "/bp-price-estimator/images/products/vipnet.png",
       description: "Specialized practice management for specialists.",
       tooltip: "Designed for specialists with unique needs.",
       basePrice: 249,
@@ -179,7 +179,7 @@ const productsData = {
     {
       id: "bp-allied",
       name: "Bp Allied",
-      image: "/images/products/bpallied.png",
+      image: "/bp-price-estimator/images/products/bpallied.png",
       description: "Practice management solution for allied health professionals.",
       tooltip: "Tailored for allied health disciplines.",
       basePrice: 179,
@@ -189,7 +189,7 @@ const productsData = {
     {
       id: "bp-omni",
       name: "Bp Omni",
-      image: "/images/products/bpomni.png",
+      image: "/bp-price-estimator/images/products/bpomni.png",
       description: "Advanced practice management system with remote access.",
       tooltip: "Flexible, anywhere-accessible system.",
       basePrice: 299,
@@ -201,7 +201,7 @@ const productsData = {
     {
       id: "bp-mobile",
       name: "Best Practice Mobile",
-      image: "/images/products/bpmobile.svg",
+      image: "/bp-price-estimator/images/products/bpmobile.svg",
       description: "Access your practice on the go.",
       tooltip: "Mobile app integration for remote access.",
       basePrice: 49,
@@ -213,7 +213,7 @@ const productsData = {
     {
       id: "best-health",
       name: "Best Health App",
-      image: "/images/products/bha.png",
+      image: "/bp-price-estimator/images/products/bha.png",
       description: "Patient engagement platform.",
       tooltip: "Streamline patient-practice communication.",
       basePrice: 99,
@@ -223,7 +223,7 @@ const productsData = {
     {
       id: "best-health-booking",
       name: "Best Health Booking",
-      image: "/images/products/bhbooking.png",
+      image: "/bp-price-estimator/images/products/bhbooking.png",
       description: "Online appointment booking.",
       tooltip: "24/7 appointment booking for patient convenience.",
       basePrice: 39,
@@ -235,7 +235,7 @@ const productsData = {
     {
       id: "bp-sms",
       name: "Bp SMS",
-      image: "/images/products/bpsms.png",
+      image: "/bp-price-estimator/images/products/bpsms.png",
       description: "Integrated SMS messaging.",
       tooltip: "Send reminders and messages via SMS.",
       basePrice: 29,
@@ -245,7 +245,7 @@ const productsData = {
     {
       id: "bp-comms",
       name: "Bp Comms",
-      image: "/images/products/bpcomms.png",
+      image: "/bp-price-estimator/images/products/bpcomms.png",
       description: "Advanced communication suite.",
       tooltip: "Enhance practice-patient interactions.",
       basePrice: 59,
@@ -255,7 +255,7 @@ const productsData = {
     {
       id: "lyrebird",
       name: "Best Practice & Lyrebird Scribe",
-      image: "/images/products/bplyrebird.png",
+      image: "/bp-price-estimator/images/products/bplyrebird.png",
       description: "Medical speech recognition.",
       tooltip: "Dictate notes for improved efficiency.",
       basePrice: 79,
