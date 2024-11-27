@@ -86,23 +86,45 @@ const ContactDetails = ({ contactInfo, setContactInfo, proceed }) => (
 );
 
 // --- Use Case Data ---
+// --- Updated Use Case Data ---
 const useCaseData = [
   {
     id: "gp",
-    title: "General Practitioner",
-    description: "Complete practice management solution for GP clinics",
+    title: "GP Clinics",
+    description: "Complete practice management solution for GP clinics.",
   },
   {
-    id: "specialist",
-    title: "Specialist",
-    description: "Specialised solutions for medical specialists",
+    id: "allied-health",
+    title: "Allied Health",
+    description: "Tailored tools for allied health practices.",
   },
   {
-    id: "ahp",
-    title: "Allied Health Professional",
-    description: "Tailored tools for allied health practices",
+    id: "mixed-clinics",
+    title: "Mixed Clinics",
+    description: "Integrated solutions for mixed clinic environments.",
+  },
+  {
+    id: "community-care",
+    title: "Community Care",
+    description: "Specialised tools for community healthcare services.",
+  },
+  {
+    id: "specialists",
+    title: "Specialists",
+    description: "Customised solutions for medical specialists.",
+  },
+  {
+    id: "enterprise",
+    title: "Enterprise Solution",
+    description: "Scalable solutions for enterprise-level healthcare.",
+  },
+  {
+    id: "all-clinics",
+    title: "All Clinic Types",
+    description: "Comprehensive solutions for all clinic types.",
   },
 ];
+
 
 // --- Use Case Component ---
 const UseCase = ({ useCase, setUseCase, setProductType }) => (
