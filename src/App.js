@@ -186,7 +186,7 @@ const productsData = {
       tooltip: "Comprehensive solution tailored for general practitioners.",
       basePrice: 199,
       type: "pms",
-      availableTo: ["gp"],
+      availableTo: ["gp", "all-clinics"],
     },
     {
       id: "bp-vipnet",
@@ -196,7 +196,7 @@ const productsData = {
       tooltip: "Designed for specialists with unique needs.",
       basePrice: 249,
       type: "pms",
-      availableTo: ["specialist"],
+      availableTo: ["specialists", "all-clinics"],
     },
     {
       id: "bp-allied",
@@ -206,7 +206,7 @@ const productsData = {
       tooltip: "Tailored for allied health disciplines.",
       basePrice: 179,
       type: "pms",
-      availableTo: ["ahp"],
+      availableTo: ["allied-health", "all-clinics"],
     },
     {
       id: "bp-omni",
@@ -216,7 +216,7 @@ const productsData = {
       tooltip: "Flexible, anywhere-accessible system.",
       basePrice: 299,
       type: "pms",
-      availableTo: ["gp", "specialist", "ahp"],
+      availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
     },
   ],
   mobile: [
@@ -228,7 +228,7 @@ const productsData = {
       tooltip: "Mobile app integration for remote access.",
       basePrice: 49,
       type: "mobile",
-      availableTo: ["gp", "specialist", "ahp"],
+      availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
     },
   ],
   patient: [
@@ -240,7 +240,7 @@ const productsData = {
       tooltip: "Streamline patient-practice communication.",
       basePrice: 99,
       type: "patient",
-      availableTo: ["gp", "specialist", "ahp"],
+      availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
     },
     {
       id: "best-health-booking",
@@ -250,7 +250,7 @@ const productsData = {
       tooltip: "24/7 appointment booking for patient convenience.",
       basePrice: 39,
       type: "patient",
-      availableTo: ["gp", "specialist", "ahp"],
+      availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
     },
   ],
   additional: [
@@ -262,7 +262,7 @@ const productsData = {
       tooltip: "Send reminders and messages via SMS.",
       basePrice: 29,
       type: "additional",
-      availableTo: ["gp", "specialist", "ahp"],
+      availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
     },
     {
       id: "bp-comms",
@@ -272,7 +272,7 @@ const productsData = {
       tooltip: "Enhance practice-patient interactions.",
       basePrice: 59,
       type: "additional",
-      availableTo: ["gp", "specialist", "ahp"],
+      availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
     },
     {
       id: "lyrebird",
@@ -282,7 +282,7 @@ const productsData = {
       tooltip: "Dictate notes for improved efficiency.",
       basePrice: 79,
       type: "additional",
-      availableTo: ["gp", "specialist", "ahp"],
+      availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
     },
   ],
 };
