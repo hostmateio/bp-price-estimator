@@ -152,26 +152,26 @@ const productTypesData = [
   {
     id: "pms",
     title: "Practice Management System",
-    description: "Core clinical and practice management",
-    availableTo: ["gp", "specialist", "ahp"],
+    description: "Core clinical and practice management.",
+    availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
   },
   {
     id: "mobile",
     title: "Mobile Solutions",
-    description: "Access your practice on the go",
-    availableTo: ["gp", "specialist", "ahp"],
+    description: "Access your practice on the go.",
+    availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
   },
   {
     id: "patient",
     title: "Patient Engagement",
-    description: "Enhanced patient communication tools",
-    availableTo: ["gp", "specialist", "ahp"],
+    description: "Enhanced patient communication tools.",
+    availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
   },
   {
     id: "additional",
     title: "Additional Features",
-    description: "Extend your system capabilities",
-    availableTo: ["gp", "specialist", "ahp"],
+    description: "Extend your system capabilities.",
+    availableTo: ["gp", "specialists", "allied-health", "all-clinics"],
   },
 ];
 
