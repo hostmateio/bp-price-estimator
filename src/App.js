@@ -344,15 +344,16 @@ const ProductSelection = ({ useCase, selectedProducts, handleProductSelect }) =>
 // --- Estimate Component ---
 const EstimateStep = ({ selectedProducts = [], users = {}, setUsers, handleRemoveProduct }) => {
   const [billingCycle, setBillingCycle] = useState('monthly');
+  const annualDiscountRate = 0.1;
 
   const handleUserChange = (productId, licenseType, value) => {
     if (!setUsers) return;
-    setUsers(prev => ({
+    setUsers((prev) => ({
       ...prev,
       [productId]: {
         ...prev[productId],
-        [licenseType]: parseInt(value) || 0
-      }
+        [licenseType]: parseInt(value) || 0,
+      },
     }));
   };
 
@@ -360,10 +361,15 @@ const EstimateStep = ({ selectedProducts = [], users = {}, setUsers, handleRemov
     if (!userCounts) return 0;
     const monthlyTotal = Object.entries(userCounts).reduce((acc, [type, count]) => {
       const multiplier = type === 'fullTime' ? 1 : 0.5;
-      return acc + (count * basePrice * multiplier);
+      return acc + count * basePrice * multiplier;
     }, 0);
-    
-    return billingCycle === 'annually' ? monthlyTotal * 12 : monthlyTotal;
+
+    if (billingCycle === 'annually') {
+      const discountedPrice = monthlyTotal * 12 * (1 - annualDiscountRate);
+      return discountedPrice;
+    }
+
+    return monthlyTotal;
   };
 
   const totalCost = selectedProducts?.reduce((acc, product) => {
@@ -374,7 +380,7 @@ const EstimateStep = ({ selectedProducts = [], users = {}, setUsers, handleRemov
 
   return (
     <div className="flex flex-col space-y-6 max-w-6xl mx-auto">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center">
         <h2 className="text-2xl font-semibold text-gray-800">Get your estimate</h2>
         <button className="flex items-center px-4 py-2 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700">
           <Plus className="w-4 h-4 mr-2" />
@@ -382,123 +388,144 @@ const EstimateStep = ({ selectedProducts = [], users = {}, setUsers, handleRemov
         </button>
       </div>
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column - Product Details */}
-        <div className="col-span-2 space-y-8">
-  {selectedProducts.map(product => (
-    <div key={product.id} className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-      <div className="flex items-center space-x-6">
-        <div className="bg-gray-100 p-3 rounded-lg">
-          <img 
-            src={product.image} 
-            alt={`${product.name}`} 
-            className="h-12 w-auto object-contain invert"  
-          />
-        </div>
-        <h3 className="text-lg font-semibold">{product.name}</h3>
-      </div>
-
-      <div className="space-y-6">
-        {['fullTime', 'partTime'].map(licenseType => (
-          <div key={licenseType} className="bg-gray-50 rounded-lg p-4">
-            <div className="flex justify-between items-center mb-2">
-              <label className="font-medium text-gray-700">
-                {licenseType === 'fullTime' ? 'Full Time' : 'Part Time'}
-              </label>
-              <div className="flex items-center space-x-3">
-                <input
-                  type="number"
-                  min="0"
-                  value={users[product.id]?.[licenseType] || 0}
-                  onChange={(e) => handleUserChange(product.id, licenseType, e.target.value)}
-                  className="w-20 px-3 py-2 border rounded-lg text-center"
-                />
-                <span className="text-gray-600">users</span>
+        <div className="col-span-1 lg:col-span-2 space-y-8">
+          {selectedProducts.map((product) => (
+            <div
+              key={product.id}
+              className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm"
+            >
+              <div className="flex flex-wrap items-center space-x-4">
+                <div className="bg-gray-100 p-3 rounded-lg flex-shrink-0">
+                  <img
+                    src={product.image}
+                    alt={`${product.name}`}
+                    className="h-12 w-auto object-contain"
+                  />
+                </div>
+                <h3 className="text-lg font-semibold">{product.name}</h3>
               </div>
-            </div>
-            <div className="flex justify-between text-sm text-gray-600">
-              <span>${(product.basePrice * (licenseType === 'fullTime' ? 1 : 0.5)).toFixed(2)} per user</span>
-              <span className="font-medium">
-                ${calculateProductTotal(
-                  product.id,
-                  {[licenseType]: users[product.id]?.[licenseType] || 0},
-                  product.basePrice
-                ).toFixed(2)} {billingCycle}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
 
-      {handleRemoveProduct && (
-        <button
-          onClick={() => handleRemoveProduct(product)}
-          className="mt-4 flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 px-4 py-2 rounded-lg transition-colors"
-        >
-          <Trash2 className="w-4 h-4" />
-          <span>Remove {product.name}</span>
-        </button>
-      )}
-    </div>
-  ))}
-</div>
+              <div className="space-y-6 mt-4">
+                {['fullTime', 'partTime'].map((licenseType) => (
+                  <div
+                    key={licenseType}
+                    className="bg-gray-50 rounded-lg p-4 flex flex-wrap justify-between items-center"
+                  >
+                    <label className="font-medium text-gray-700">
+                      {licenseType === 'fullTime' ? 'Full Time' : 'Part Time'}
+                    </label>
+                    <div className="flex items-center space-x-3">
+                      <input
+                        type="number"
+                        min="0"
+                        value={users[product.id]?.[licenseType] || 0}
+                        onChange={(e) => handleUserChange(product.id, licenseType, e.target.value)}
+                        className="w-20 px-3 py-2 border rounded-lg text-center"
+                      />
+                      <span className="text-gray-600">users</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {handleRemoveProduct && (
+                <button
+                  onClick={() => handleRemoveProduct(product)}
+                  className="mt-4 flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 px-4 py-2 rounded-lg transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  <span>Remove {product.name}</span>
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
 
         {/* Right Column - Estimate Summary */}
         <div className="col-span-1">
-  <div className="sticky top-4">
-    <div className="bg-tealCustom-500 rounded-t-lg p-4">
-      <h3 className="text-xl font-semibold text-white">Estimate</h3>
-    </div>
-    <div className="border-x border-b rounded-b-lg p-4 space-y-6 bg-white shadow-sm">
-      <div className="flex justify-center items-center space-x-6 p-2 bg-gray-50 rounded-lg">
-        <span className={`${billingCycle === 'monthly' ? 'text-tealCustom-500 font-medium' : 'text-gray-600'}`}>Monthly</span>
-        <Switch
-          checked={billingCycle === 'annually'}
-          onCheckedChange={(checked) => setBillingCycle(checked ? 'annually' : 'monthly')}
-        />
-        <span className={`${billingCycle === 'annually' ? 'text-tealCustom-500 font-medium' : 'text-gray-600'}`}>Annually</span>
-      </div>
-
-      {selectedProducts.map(product => (
-        <div key={product.id} className="space-y-2 pb-4 border-b">
-          <h4 className="font-medium text-gray-900">{product.name}</h4>
-          {Object.entries(users[product.id] || {}).map(([type, count]) => (
-            Number(count) > 0 && (
-              <div key={type} className="flex justify-between text-sm text-gray-600">
-                <span>{type === 'fullTime' ? 'Full Time' : 'Part Time'} × {count}</span>
-                <span className="font-medium">${(product.basePrice * count * (type === 'fullTime' ? 1 : 0.5)).toFixed(2)}</span>
+          <div className="lg:sticky top-4">
+            <div className="bg-tealCustom-500 rounded-t-lg p-4">
+              <h3 className="text-xl font-semibold text-white">Estimate</h3>
+            </div>
+            <div className="border-x border-b rounded-b-lg p-4 space-y-6 bg-white shadow-sm">
+              <div className="flex justify-center items-center space-x-6 p-2 bg-gray-50 rounded-lg">
+                <button
+                  className={`px-4 py-2 rounded-lg ${
+                    billingCycle === 'monthly'
+                      ? 'bg-tealCustom-500 text-white'
+                      : 'bg-gray-200 text-gray-600'
+                  }`}
+                  onClick={() => setBillingCycle('monthly')}
+                >
+                  Monthly
+                </button>
+                <button
+                  className={`px-4 py-2 rounded-lg ${
+                    billingCycle === 'annually'
+                      ? 'bg-tealCustom-500 text-white'
+                      : 'bg-gray-200 text-gray-600'
+                  }`}
+                  onClick={() => setBillingCycle('annually')}
+                >
+                  Annually
+                </button>
               </div>
-            )
-          ))}
-        </div>
-      ))}
 
-      <div className="pt-2">
-        <div className="text-3xl font-bold text-center text-gray-900">
-          ${totalCost.toFixed(2)} AU
-        </div>
-        <div className="text-center text-gray-600 text-sm mt-1">
-          Estimated {billingCycle} cost<br />
-          excluding GST
-        </div>
-      </div>
+              {selectedProducts.map((product) => (
+                <div key={product.id} className="space-y-2 pb-4 border-b">
+                  <h4 className="font-medium text-gray-900">{product.name}</h4>
+                  {Object.entries(users[product.id] || {}).map(([type, count]) =>
+                    Number(count) > 0 ? (
+                      <div key={type} className="flex justify-between text-sm text-gray-600">
+                        <span>
+                          {type === 'fullTime' ? 'Full Time' : 'Part Time'} × {count}
+                        </span>
+                        <span className="font-medium">
+                          $
+                          {(
+                            product.basePrice *
+                            count *
+                            (type === 'fullTime' ? 1 : 0.5) *
+                            (billingCycle === 'annually' ? (1 - annualDiscountRate) * 12 : 1)
+                          ).toFixed(2)}
+                        </span>
+                      </div>
+                    ) : null
+                  )}
+                </div>
+              ))}
 
-      <div className="space-y-3 pt-2">
-        <button className="w-full py-3 px-4 bg-tealCustom-500 text-white rounded-lg font-medium hover:bg-tealCustom-600 transition-colors">
-          Contact Sales
-        </button>
-        <button className="w-full py-2.5 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
-          <Download className="w-4 h-4 mr-2" />
-          Download PDF
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
+              <div className="pt-2">
+                <div className="text-3xl font-bold text-center text-gray-900">
+                  ${totalCost.toFixed(2)} AU
+                </div>
+                <div className="text-center text-gray-600 text-sm mt-1">
+                  Estimated {billingCycle} cost
+                  <br />
+                  excluding GST
+                </div>
+              </div>
+
+              <div className="space-y-3 pt-2">
+                <button className="w-full py-3 px-4 bg-tealCustom-500 text-white rounded-lg font-medium hover:bg-tealCustom-600 transition-colors">
+                  Contact Sales
+                </button>
+                <button className="w-full py-2.5 px-4 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
+
+
 
 // --- Main Component ---
 const PricingCalculator = () => {
