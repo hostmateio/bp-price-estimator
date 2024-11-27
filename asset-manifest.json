@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bp-price-estimator/static/css/main.6b972d96.css",
+    "main.js": "/bp-price-estimator/static/js/main.f6be2959.js",
+    "static/js/453.37148ebd.chunk.js": "/bp-price-estimator/static/js/453.37148ebd.chunk.js",
+    "index.html": "/bp-price-estimator/index.html",
+    "main.6b972d96.css.map": "/bp-price-estimator/static/css/main.6b972d96.css.map",
+    "main.f6be2959.js.map": "/bp-price-estimator/static/js/main.f6be2959.js.map",
+    "453.37148ebd.chunk.js.map": "/bp-price-estimator/static/js/453.37148ebd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b972d96.css",
+    "static/js/main.f6be2959.js"
+  ]
+}
