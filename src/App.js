@@ -487,6 +487,10 @@ const PricingCalculator = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [users, setUsers] = useState({});
 
+  React.useEffect(() => {
+    document.title = "BP Price Estimator";
+  }, []);
+
   const handleProductSelect = (product) => {
     setSelectedProducts((prev) => {
       const exists = prev.find((p) => p.id === product.id);
