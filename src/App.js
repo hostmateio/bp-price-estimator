@@ -170,7 +170,7 @@ const productsData = {
       id: "bp-vipnet",
       name: "Bp ViP.net",
       image: "/bp-price-estimator/images/products/vipnet.png",
-      description: "Specialized practice management for specialists.",
+      description: "Specialised practice management for specialists.",
       tooltip: "Designed for specialists with unique needs.",
       basePrice: 249,
       type: "pms",
