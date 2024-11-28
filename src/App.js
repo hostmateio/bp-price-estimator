@@ -317,12 +317,12 @@ const ProductSelection = ({ useCase, selectedProducts, handleProductSelect }) =>
                   title={product.tooltip}
                 >
                   <div className="flex flex-col items-center space-y-2">
-                    {product.image && (
+                  {product.image && (
                       <div className="bg-gray-100 p-2 rounded-lg w-full flex justify-center">
                         <img
                           src={product.image}
                           alt={`${product.name}`}
-                          className="h-16 w-auto object-contain"
+                          className="h-16 w-auto object-contain invert" // Reintroduce the 'invert' class here
                         />
                       </div>
                     )}
